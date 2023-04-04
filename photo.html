@@ -39,14 +39,19 @@ navigator.mediaDevices.getUserMedia(constraints)
   });
 
       // Prendre une photo lorsque le bouton est cliqué
-      captureButton.addEventListener('click', () => {
-        // Dessiner la photo sur le canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+// Prendre une photo lorsque le bouton est cliqué
+captureButton.addEventListener('click', () => {
+  // Définir les dimensions du canvas en fonction de la vidéo
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
 
-        // Convertir le canvas en image
-        const dataURL = canvas.toDataURL('image/jpeg');
-        console.log(dataURL);
-      });
+  // Dessiner la photo sur le canvas
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Convertir le canvas en image
+  const dataURL = canvas.toDataURL('image/jpeg');
+  console.log(dataURL);
+});
     </script>
   </body>
 </html>
