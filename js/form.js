@@ -47,7 +47,7 @@ addAddressForm.addEventListener('submit', async (event) => {
 async function saveAddress(address) {
     const addresses = await loadAddresses();
     addresses.push(address);
-    const response = await fetch('js/adresses.json', {
+    const response = await fetch('adresses.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ async function saveAddress(address) {
     return data;
 }
   async function loadAddresses() {
-    const response = await fetch('js/adresses.json');
+    const response = await fetch('adresses.php');
     const data = await response.json();
     return data;
   }
