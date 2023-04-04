@@ -1,0 +1,12 @@
+[
+    {
+        "street": "Rue de la Paix",
+        "city": "Paris",
+        "postalCode": "75001"
+    },
+    {
+        "street": "Rue de Rivoli",
+        "city": "Paris",
+        "postalCode": "75004"
+    }
+]

@@ -12,12 +12,36 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <script type="module" src="js/main.js" defer></script>
+    <script type="module" src="js/leaflet-config.js" defer></script>
 
     <title>accpl</title>
 </head>
 
 <body>
+    <div id="search">
+    <input id="search-input" type="text" placeholder="Recherchez une adresse..." />
+    <button id="add-address-button">Ajouter</button>
+    <button id="cancel-add-button">Annuler</button>
+  </div>
+
+  <div id="add-address-dialog" style="display: none;">
+    <form id="add-address-form">
+      <label for="street">Adresse:</label>
+      <input type="text" id="street" name="street" required><br><br>
+  
+      <label for="city">Ville:</label>
+      <input type="text" id="city" name="city" required><br><br>
+  
+      <label for="postal-code">Code Postal:</label>
+      <input type="text" id="postal-code" name="postal-code" required><br><br>
+  
+      <button type="submit">Ajouter</button>
+    </form>
+  </div>
+  
     <div id="map"></div>
+    <script src="js/form.js"></script>
+
 </body>
 
 </html>

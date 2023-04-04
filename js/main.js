@@ -1,4 +1,6 @@
-import { initMap } from './leaflet-config.js';
+import { initMap, handleAutocomplete } from './leaflet-config.js';
 
-// Initialisez la carte
+const searchInput = document.getElementById('search-input');
+
 initMap();
+handleAutocomplete(searchInput);
