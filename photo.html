@@ -5,7 +5,7 @@
     <title>Camera Capture</title>
   </head>
   <body>
-    <video id="video" autoplay></video>
+    <video id="video" autoplay width="640" height="480"></video>
     <button id="capture">Prendre une photo</button>
     <canvas id="canvas" style="display: none;"></canvas>
     <script>
@@ -26,6 +26,10 @@ navigator.mediaDevices.getUserMedia(constraints)
     const video = document.querySelector('video');
     video.srcObject = stream;
     video.onloadedmetadata = (e) => {
+      // Définir les dimensions de la vidéo
+      video.width = video.videoWidth;
+      video.height = video.videoHeight;
+
       video.play();
     };
   })
