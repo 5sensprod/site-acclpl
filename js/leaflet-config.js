@@ -1,20 +1,23 @@
-// import L from 'leaflet';
+import { createOpenStreetMapLayer, createBingAerialLayer } from './mapLayers.js';
 
-// Fonction pour initialiser la carte Leaflet
-export function initMap() {
-  // Créez l'objet de la carte et liez-le à l'élément HTML avec l'ID 'map'
+export async function initMap(apiKey) {
   const map = L.map('map', {
-    center: [48.956682, 4.364298], // Coordonnées de Châlons-en-Champagne
+    center: [48.956682, 4.364298],
     zoom: 13,
   });
 
-  // Ajoutez un fond de carte OpenStreetMap
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+  const osmLayer = createOpenStreetMapLayer();
+  const bingAerialLayer = await createBingAerialLayer(apiKey);
 
-  // Ajoutez un marqueur sur la carte
+  osmLayer.addTo(map);
+
+  const baseLayers = {
+    'OpenStreetMap': osmLayer,
+    'Bing Aerial': bingAerialLayer,
+  };
+
+  L.control.layers(baseLayers).addTo(map);
+
   const marker = L.marker([48.956682, 4.364298]).addTo(map);
   marker.bindPopup('<b>Châlons-en-Champagne</b>').openPopup();
 }
