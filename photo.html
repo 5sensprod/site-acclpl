@@ -2,47 +2,43 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Camera Capture</title>
+    <title>Exemple de requête d'autorisation avec navigator.permissions.query()</title>
   </head>
   <body>
-    <video id="video" autoplay></video>
     <button id="capture">Prendre une photo</button>
-    <canvas id="canvas" style="display: none;"></canvas>
+    <video id="camera-stream" autoplay></video>
+    <canvas id="photo-canvas"></canvas>
+    
     <script>
-      const video = document.getElementById('video');
       const captureButton = document.getElementById('capture');
-      const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
-      const constraints = {
-  video: { 
-    facingMode: { 
-      exact: "environment" 
-    } 
-  }
-};
-
-navigator.mediaDevices.getUserMedia(constraints)
-  .then((stream) => {
-    const video = document.querySelector('video');
-    video.srcObject = stream;
-    video.onloadedmetadata = (e) => {
-      video.play();
-    };
-  })
-  .catch((err) => {
-    console.log("Error accessing media devices.", err);
-  });
-
-      // Prendre une photo lorsque le bouton est cliqué
-      captureButton.addEventListener('click', () => {
-        // Dessiner la photo sur le canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Convertir le canvas en image
-        const dataURL = canvas.toDataURL('image/jpeg');
-        console.log(dataURL);
+      const cameraStream = document.getElementById('camera-stream');
+      const photoCanvas = document.getElementById('photo-canvas');
+      const photoContext = photoCanvas.getContext('2d');
+      
+      captureButton.addEventListener('click', async () => {
+        try {
+          const permission = await navigator.permissions.query({name: 'camera'});
+          if (permission.state === 'granted') {
+            const stream = await navigator.mediaDevices.getUserMedia({video: true});
+            cameraStream.srcObject = stream;
+            await new Promise(resolve => cameraStream.onloadedmetadata = resolve);
+            
+            photoCanvas.width = cameraStream.videoWidth;
+            photoCanvas.height = cameraStream.videoHeight;
+            photoContext.drawImage(cameraStream, 0, 0);
+            
+            stream.getTracks().forEach(track => track.stop());
+            cameraStream.srcObject = null;
+            
+            const photoData = photoCanvas.toDataURL();
+            console.log(photoData);
+          } else {
+            console.log('Permission denied');
+          }
+        } catch (error) {
+          console.error('Error accessing media devices.', error);
+        }
       });
     </script>
   </body>
 </html>
-
