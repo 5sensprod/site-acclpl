@@ -1,15 +1,5 @@
 [
     {
-        "street": "Rue de la Paix",
-        "city": "Paris",
-        "postalCode": "75001"
-    },
-    {
-        "street": "Rue de Rivoli",
-        "city": "Paris",
-        "postalCode": "75004"
-    },
-    {
         "street": "3 rue des poissoniers",
         "city": "chalons en champagne",
         "postalCode": "51000"

@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Capture d'image en temps réel</title>
-</head>
-<body>
-	<h1>Capture d'image en temps réel</h1>
-	<div>
-		<button id="capture">Prendre une photo</button>
-	</div>
-	<div>
-		<img id="photo" src="" alt="Votre photo">
-	</div>
+  <head>
+    <meta charset="utf-8">
+    <title>Camera Capture</title>
+  </head>
+  <body>
+    <video id="video" autoplay></video>
+    <button id="capture">Prendre une photo</button>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <script>
+      const video = document.getElementById('video');
+      const captureButton = document.getElementById('capture');
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
 
-	<script>
-		const captureButton = document.getElementById('capture');
-		const photo = document.getElementById('photo');
+      // Obtenir l'accès à la caméra
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+        })
+        .catch(error => {
+          console.error('Error accessing media devices.', error);
+        });
 
-		captureButton.addEventListener('click', () => {
-			// Demander l'accès à la caméra
-			navigator.mediaDevices.getUserMedia({ video: true })
-				.then((stream) => {
-					// Afficher le flux vidéo dans un élément vidéo caché
-					const video = document.createElement('video');
-					video.srcObject = stream;
-					video.autoplay = true;
-					video.hidden = true;
-					document.body.appendChild(video);
+      // Prendre une photo lorsque le bouton est cliqué
+      captureButton.addEventListener('click', () => {
+        // Dessiner la photo sur le canvas
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-					// Prendre une capture d'image en cliquant sur le bouton de capture
-					captureButton.addEventListener('click', () => {
-						const canvas = document.createElement('canvas');
-						canvas.width = video.videoWidth;
-						canvas.height = video.videoHeight;
-						canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-						photo.src = canvas.toDataURL('image/png');
-
-						// Arrêter le flux vidéo
-						stream.getTracks().forEach((track) => {
-							track.stop();
-						});
-					});
-				})
-				.catch((error) => {
-					console.error('Erreur lors de la demande d\'accès à la caméra :', error);
-				});
-		});
-	</script>
-</body>
+        // Convertir le canvas en image
+        const dataURL = canvas.toDataURL('image/jpeg');
+        console.log(dataURL);
+      });
+    </script>
+  </body>
 </html>
+
