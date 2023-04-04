@@ -1,3 +1,5 @@
+
+
 const addAddressButton = document.getElementById('add-address-button');
 const addAddressDialog = document.getElementById('add-address-dialog');
 const cancelAddButton = document.getElementById('cancel-add-button');
@@ -56,7 +58,7 @@ async function saveAddress(address) {
     return data;
 }
   async function loadAddresses() {
-    const response = await fetch('http://127.0.0.1:5500/js/adresses.json');
+    const response = await fetch('js/adresses.json');
     const data = await response.json();
     return data;
   }

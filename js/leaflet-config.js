@@ -35,7 +35,7 @@ export async function handleAutocomplete(input) {
   });
 }
 
-function updateAutocompleteList(input, results) {
+export function updateAutocompleteList(input, results) {
   const list = document.getElementById('autocomplete-list');
   if (list) {
     list.remove();
