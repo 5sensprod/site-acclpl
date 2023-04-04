@@ -35,6 +35,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   })
   .catch((err) => {
     console.log("Error accessing media devices.", err);
+    alert("Erreur lors de l'accès à la caméra. Assurez-vous que vous avez autorisé l'accès à la caméra et que vous utilisez un navigateur compatible.");
   });
 
       // Prendre une photo lorsque le bouton est cliqué
