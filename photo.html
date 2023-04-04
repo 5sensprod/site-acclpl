@@ -13,16 +13,25 @@
       const captureButton = document.getElementById('capture');
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
+      const constraints = {
+  video: { 
+    facingMode: { 
+      exact: "environment" 
+    } 
+  }
+};
 
-      // Obtenir l'accès à la caméra
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-          video.srcObject = stream;
-          video.play();
-        })
-        .catch(error => {
-          console.error('Error accessing media devices.', error);
-        });
+navigator.mediaDevices.getUserMedia(constraints)
+  .then((stream) => {
+    const video = document.querySelector('video');
+    video.srcObject = stream;
+    video.onloadedmetadata = (e) => {
+      video.play();
+    };
+  })
+  .catch((err) => {
+    console.log("Error accessing media devices.", err);
+  });
 
       // Prendre une photo lorsque le bouton est cliqué
       captureButton.addEventListener('click', () => {
