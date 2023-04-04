@@ -3,10 +3,8 @@
     "parcel-bundler": "^1.12.5"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./"
+    "build": "parcel build index.html --public-url ./ --out-dir docs"
   },
-  
   "dependencies": {
     "leaflet-bing-layer": "^3.3.1"
   }
