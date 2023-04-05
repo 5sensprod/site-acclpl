@@ -1,63 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capture d'image en temps réel</title>
-    <style>
-        video, img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Camera Capture with captureStream</title>
+  <style>
+    video, img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-    <h1>Capture d'image en temps réel</h1>
-    <div>
-        <video id="video" autoplay playsinline></video>
-        <button id="capture">Prendre une photo</button>
-    </div>
-    <div>
-        <img id="photo" src="" alt="Votre photo">
-    </div>
+  <h1>Camera Capture with captureStream</h1>
+  <div>
+    <video id="video" autoplay playsinline></video>
+    <button id="capture">Prendre une photo</button>
+  </div>
+  <div>
+    <img id="photo" src="" alt="Votre photo">
+  </div>
 
-    <script>
-        const video = document.getElementById('video');
-        const captureButton = document.getElementById('capture');
-        const photo = document.getElementById('photo');
+  <script>
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture');
+    const photo = document.getElementById('photo');
 
-        function getCameraReady() {
-            return new Promise((resolve, reject) => {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then((stream) => {
-                        video.srcObject = stream;
-                        video.onloadedmetadata = () => {
-                            video.play();
-                            resolve();
-                        };
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    });
-            });
-        }
+    async function getCameraReady() {
+      const constraints = { video: { facingMode: 'environment' } };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = stream;
+    }
 
-        captureButton.addEventListener('click', async () => {
-            try {
-                await getCameraReady();
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const context = canvas.getContext('2d');
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                photo.src = canvas.toDataURL('image/png');
-                
-                video.srcObject.getTracks().forEach(track => track.stop());
-            } catch (error) {
-                console.error('Erreur lors de la demande d\'accès à la caméra :', error);
-            }
-        });
-    </script>
+    captureButton.addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      photo.src = canvas.toDataURL('image/png');
+    });
+
+    getCameraReady().catch((error) => {
+      console.error('Erreur lors de la demande d\'accès à la caméra :', error);
+    });
+  </script>
 </body>
 </html>
