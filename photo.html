@@ -26,12 +26,16 @@ navigator.mediaDevices.getUserMedia(constraints)
     const video = document.querySelector('video');
     video.srcObject = stream;
     video.onloadedmetadata = (e) => {
-      // Définir les dimensions de la vidéo
-      video.width = video.videoWidth;
-      video.height = video.videoHeight;
+  // Définir les dimensions de la vidéo
+  video.width = video.videoWidth;
+  video.height = video.videoHeight;
 
-      video.play();
-    };
+  // Mettre à jour les dimensions du canvas
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  video.play();
+};
   })
   .catch((err) => {
     console.log("Error accessing media devices.", err);
