@@ -1,7 +1,51 @@
 [
     {
-        "street": "3 rue des poissoniers",
-        "city": "chalons en champagne",
-        "postalCode": "51000"
+        "street": "Rue des Poissonniers",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.955607,
+        "longitude": 4.361513
+    },
+    {
+        "street": "Rond-point Bagatelle",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.94706,
+        "longitude": 4.374099
+    },
+    {
+        "street": "Impasse Boulanger",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.961562,
+        "longitude": 4.373045
+    },
+    {
+        "street": "Chemin du Barrage",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.952221,
+        "longitude": 4.353759
+    },
+    {
+        "street": "Rue Marcelin Berthelot",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.96879,
+        "longitude": 4.359312
+    },
+    {
+        "street": "Rue du Pont de la Cidrerie",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.949107,
+        "longitude": 4.365442
+    },
+    {
+        "street": "Cours d'Ormesson",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.952396,
+        "longitude": 4.363634
     }
 ]
