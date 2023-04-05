@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Capture d'image en temps réel</title>
+  <meta charset="utf-8">
+  <title>Camera Capture with captureStream</title>
+  <style>
+    video, img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-	<h1>Capture d'image en temps réel</h1>
-	<div>
-		<button id="capture">Prendre une photo</button>
-	</div>
-	<div>
-		<img id="photo" src="" alt="Votre photo">
-	</div>
+  <h1>Camera Capture with captureStream</h1>
+  <div>
+    <button id="start-camera">Lancer l'appareil photo</button>
+    <video id="video" autoplay playsinline style="display: none;"></video>
+    <button id="capture" style="display: none;">Prendre une photo</button>
+    <button id="keep" style="display: none;">Garder la photo</button>
+    <button id="retry" style="display: none;">Reprendre une photo</button>
+  </div>
+  <div>
+    <img id="photo" src="" alt="Votre photo">
+  </div>
 
-	<script>
-		const captureButton = document.getElementById('capture');
-		const photo = document.getElementById('photo');
+  <script>
+    const video = document.getElementById('video');
+    const startCameraButton = document.getElementById('start-camera');
+    const captureButton = document.getElementById('capture');
+    const keepButton = document.getElementById('keep');
+    const retryButton = document.getElementById('retry');
+    const photo = document.getElementById('photo');
+    let stream;
 
-		captureButton.addEventListener('click', function requestCamera() {
-			// Demander l'accès à la caméra
-			navigator.mediaDevices.getUserMedia({ video: true })
-				.then((stream) => {
-					// Afficher le flux vidéo dans un élément vidéo caché
-					const video = document.createElement('video');
-					video.srcObject = stream;
-					video.autoplay = true;
-					video.hidden = true;
-					document.body.appendChild(video);
+    async function getCameraReady() {
+      const constraints = { video: { facingMode: 'environment' } };
+      stream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = stream;
+      video.style.display = 'block';
+      captureButton.style.display = 'block';
+    }
 
-					// Prendre une capture d'image en cliquant sur le bouton de capture
-					captureButton.addEventListener('click', () => {
-						const canvas = document.createElement('canvas');
-						canvas.width = video.videoWidth;
-						canvas.height = video.videoHeight;
-						canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-						photo.src = canvas.toDataURL('image/png');
+    function stopCamera() {
+      stream.getTracks().forEach((track) => {
+        track.stop();
+      });
+      video.style.display = 'none';
+      captureButton.style.display = 'none';
+    }
 
-						// Arrêter le flux vidéo
-						stream.getTracks().forEach((track) => {
-							track.stop();
-						});
+    startCameraButton.addEventListener('click', () => {
+      getCameraReady().catch((error) => {
+        console.error('Erreur lors de la demande d\'accès à la caméra :', error);
+      });
+      startCameraButton.style.display = 'none';
+    });
 
-						// Supprimer l'écouteur d'événements pour éviter de prendre plusieurs photos
-						captureButton.removeEventListener('click', requestCamera);
-					});
-				})
-				.catch((error) => {
-					console.error('Erreur lors de la demande d\'accès à la caméra :', error);
-				});
-			// Supprimer l'écouteur d'événements pour éviter de demander l'accès à la caméra plusieurs fois
-			captureButton.removeEventListener('click', requestCamera);
-		});
-	</script>
+    captureButton.addEventListener('click', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      photo.src = canvas.toDataURL('image/png');
+      keepButton.style.display = 'block';
+      retryButton.style.display = 'block';
+      stopCamera();
+    });
+
+    keepButton.addEventListener('click', () => {
+      // Vous pouvez ajouter des actions pour garder la photo
+    });
+
+    retryButton.addEventListener('click', () => {
+      photo.src = '';
+      getCameraReady().catch((error) => {
+        console.error('Erreur lors de la demande d\'accès à la caméra :', error);
+      });
+      keepButton.style.display = 'none';
+      retryButton.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
