@@ -47,5 +47,124 @@
         "postalCode": "51000",
         "latitude": 48.952396,
         "longitude": 4.363634
+    },
+    {
+        "street": "4 Rue Edouard Manet",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.934985,
+        "longitude": 4.385268
+    },
+    {
+        "street": "Avenue Jeanne d'Arc",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.9478,
+        "longitude": 4.347207
+    },
+    {
+        "street": "Avenue de Paris",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.953057,
+        "longitude": 4.342281
+    },
+    {
+        "street": "Avenue du Général Charles de Gaulle",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.948452,
+        "longitude": 4.371592
+    },
+    {
+        "street": "Impasse de la Fourche",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.955311,
+        "longitude": 4.335743
+    },
+    {
+        "street": "Boulevard Aristide Briand",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.953291,
+        "longitude": 4.362614
+    },
+    {
+        "street": "Boulevard Hippolyte Faure",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.953806,
+        "longitude": 4.370884
+    },
+    {
+        "street": "Boulevard Anatole France",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.960209,
+        "longitude": 4.369258
+    },
+    {
+        "street": "Boulevard Anatole France",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.960209,
+        "longitude": 4.369258
+    },
+    {
+        "street": "Rue Anaïs Ségalas",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.963952,
+        "longitude": 4.372604
+    },
+    {
+        "street": "Rue Louis Grignon",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.95515,
+        "longitude": 4.376938
+    },
+    {
+        "street": "Rue Jean Jaurès",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.953989,
+        "longitude": 4.349288
+    },
+    {
+        "street": "Rue des Frères Navlet",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.960397,
+        "longitude": 4.349508
+    },
+    {
+        "street": "Rue Jacquesson",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.955077,
+        "longitude": 4.343856
+    },
+    {
+        "street": "Placette du Cloître",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.958286,
+        "longitude": 4.363074
+    },
+    {
+        "street": "Rue du Verbeau",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.9425,
+        "longitude": 4.370262
+    },
+    {
+        "street": "Rue Georges Clémenceau",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.967173,
+        "longitude": 4.355538
     }
 ]
