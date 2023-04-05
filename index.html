@@ -2,39 +2,40 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <script type="module" src="js/main.js" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script type="module" src="js/main.js" defer></script>
 
-    <title>Association Châlonnaise contre la pollution lumineuse</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Association Châlonnaise contre la pollution lumineuse</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
 <body>
-    <div id="report">
-      <h1>Prendre une photo</h1>
-      <div>
-        <button id="start-camera">Lancer l'appareil photo</button>
-        <video id="video" autoplay playsinline style="display: none;"></video>
-        <button id="capture" style="display: none;">Prendre une photo</button>
-        <button id="keep" style="display: none;">Garder la photo</button>
-        <button id="retry" style="display: none;">Reprendre une photo</button>
-      </div>
-      <div>
-        <img id="photo" src="" alt="Votre photo">
-      </div>
+  <div id="report">
+    <h1>Alerter</h1>
+    <p>Vous pouvez nous alerter d'une pollution lumineuse en remplissant le formulaire ci-dessous.</p>
+    <p>L'adresse</p>
     <input id="location-input" type="text" placeholder="Recherchez une adresse..." />
     <button id="add-address-button">Ajouter</button>
+    <p>Le nom du commerce</p>
+    <input id="name-input" type="text" placeholder="Nom du commerce" />
+    <p>Prenez une photo de la source de pollution lumineuse</p>
+    <button id="start-camera">Lancer l'appareil photo</button>
+    <video id="video" autoplay playsinline style="display: none;"></video>
+    <button id="capture" style="display: none;">Prendre une photo</button>
+    <button id="keep" style="display: none;">Garder la photo</button>
+    <button id="retry" style="display: none;">Reprendre une photo</button>
+    <img id="photo" src="" alt="Votre photo">
   </div>
 
-    <div id="map"></div>
+  <div id="map"></div>
 </body>
 
 </html>
