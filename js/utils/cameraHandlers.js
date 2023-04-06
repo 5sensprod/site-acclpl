@@ -28,7 +28,7 @@ export function initializeCamera() {
         canvas.height = video.videoHeight;
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        photo.src = canvas.toDataURL('image/png');
+        photo.src = canvas.toDataURL('image/jpeg');
         keepButton.style.display = 'block';
         retryButton.style.display = 'block';
         stopCamera(stream);
