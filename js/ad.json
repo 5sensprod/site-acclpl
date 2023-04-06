@@ -1,0 +1,172 @@
+{
+    "reports": [
+        {
+            "id": 1,
+            "address": {
+                "street": "Placette du Cloître",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.958286,
+                "longitude": 4.363074
+            },
+            "photo": "image1.jpg",
+            "company": "5sensprod"
+        },
+        {
+            "address": {
+                "street": "Rue Traversière",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.958662,
+                "longitude": 4.366991
+            },
+            "photo": "uploads/642e3eb011601.jpg",
+            "company": "flute",
+            "id": 2
+        },
+        {
+            "address": {
+                "street": "Rue Traversière",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.958662,
+                "longitude": 4.366991
+            },
+            "photo": "uploads/642e3eb013164.jpg",
+            "company": "flute",
+            "id": 3
+        },
+        {
+            "address": {
+                "street": "Rue Jean Jaurès",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.953989,
+                "longitude": 4.349288
+            },
+            "photo": "uploads/642e3fdb4a212.jpg",
+            "company": "jean jean",
+            "id": 4
+        },
+        {
+            "address": {
+                "street": "Rue Jean Jaurès",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.953989,
+                "longitude": 4.349288
+            },
+            "photo": "uploads/642e3fdb8ce3f.jpg",
+            "company": "jean jean",
+            "id": 5
+        },
+        {
+            "address": {
+                "street": "Rue Jean Jaurès",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.953989,
+                "longitude": 4.349288
+            },
+            "photo": "uploads/642e3fe46c4ab.jpg",
+            "company": "jean jean",
+            "id": 6
+        },
+        {
+            "address": {
+                "street": "Rue de Latouche",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.959093,
+                "longitude": 4.364211
+            },
+            "photo": "uploads/642e4160817a7.jpg",
+            "company": "latouche",
+            "id": 7
+        },
+        {
+            "address": {
+                "street": "Rue de Latouche",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.959093,
+                "longitude": 4.364211
+            },
+            "photo": "uploads/642e41608cd2e.jpg",
+            "company": "latouche",
+            "id": 8
+        },
+        {
+            "address": {
+                "street": "Rue André Boulloche",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.935345,
+                "longitude": 4.378985
+            },
+            "photo": "uploads/642e44385f752.jpg",
+            "company": "boubou",
+            "id": 9
+        },
+        {
+            "address": {
+                "street": "Rue de Lorraine",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.95832,
+                "longitude": 4.378724
+            },
+            "photo": "uploads/642e45de5dbb8.jpg",
+            "company": "lolo",
+            "id": 10
+        },
+        {
+            "address": {
+                "street": "Rue de Lorraine",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.95832,
+                "longitude": 4.378724
+            },
+            "photo": "uploads/642e45de65e90.jpg",
+            "company": "lolo",
+            "id": 11
+        },
+        {
+            "address": {
+                "street": "Rue du Groupe Tritant",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.961669,
+                "longitude": 4.383028
+            },
+            "photo": "uploads/642e465f5b203.jpg",
+            "company": "tri",
+            "id": 12
+        },
+        {
+            "address": {
+                "street": "Rue Joseph Servas",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.958366,
+                "longitude": 4.36572
+            },
+            "photo": "uploads/642e483740e01.jpg",
+            "company": "sese",
+            "id": 13
+        },
+        {
+            "address": {
+                "street": "Rue Bir Hakeim",
+                "postalCode": "51000",
+                "city": "Châlons-en-Champagne",
+                "latitude": 48.941816,
+                "longitude": 4.372817
+            },
+            "photo": "uploads/642e496444753.jpg",
+            "company": "bir",
+            "id": 14
+        }
+    ]
+}

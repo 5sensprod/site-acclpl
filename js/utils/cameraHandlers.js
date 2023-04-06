@@ -1,5 +1,5 @@
 import { getCameraReady, stopCamera } from './camera.js';
-import { uploadImage } from './upload.js';
+// import { uploadImage } from './upload.js';
 
 export function initializeCamera() {
     const video = document.getElementById('video');
@@ -8,6 +8,7 @@ export function initializeCamera() {
     const keepButton = document.getElementById('keep');
     const retryButton = document.getElementById('retry');
     const photo = document.getElementById('photo');
+    const photoInput = document.getElementById('photo-input');
     let stream;
 
     startCameraButton.addEventListener('click', async () => {
@@ -36,11 +37,7 @@ export function initializeCamera() {
     });
 
     keepButton.addEventListener('click', () => {
-        uploadImage(photo.src).then(() => {
-            console.log('Image uploaded successfully');
-        }).catch((error) => {
-            console.error('Error uploading image:', error);
-        });
+        photoInput.value = photo.src; // Ajoutez cette ligne pour stocker l'image en base64 dans photoInput
     });
 
     retryButton.addEventListener('click', async () => {

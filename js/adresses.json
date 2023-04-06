@@ -166,5 +166,12 @@
         "postalCode": "51000",
         "latitude": 48.967173,
         "longitude": 4.355538
+    },
+    {
+        "street": "Rue Grenet Tellier",
+        "city": "Châlons-en-Champagne",
+        "postalCode": "51000",
+        "latitude": 48.954587,
+        "longitude": 4.363022
     }
 ]

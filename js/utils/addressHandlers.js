@@ -1,5 +1,6 @@
-import { addMarkersFromJson } from './mapConfig.js';
 import { searchAddress } from './addressSearch.js';
+
+export const addressChangeEvent = new CustomEvent('addressChange');
 
 export function initializeAddressHandlers() {
   const addAddressButton = document.getElementById('add-address-button');
@@ -24,6 +25,7 @@ export function initializeAddressHandlers() {
         latitude: latitude,
         longitude: longitude
       };
+
       console.log(address);
 
       const data = JSON.stringify(address);
@@ -37,7 +39,7 @@ export function initializeAddressHandlers() {
         .then(response => response.json())
         .then(data => {
           console.log(data);
-          addMarkersFromJson();
+          dispatchEvent(addressChangeEvent); // Déclenche l'événement personnalisé
         })
         .catch(error => {
           console.error(error);
@@ -45,3 +47,5 @@ export function initializeAddressHandlers() {
     }
   });
 }
+
+// export { addressChangeEvent };

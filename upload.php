@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $filename = 'uploads/' . uniqid() . '.png';
   
   if (file_put_contents($filename, $imageData)) {
-    echo json_encode(['status' => 'success', 'message' => 'Image uploaded successfully']);
+    echo json_encode(['status' => 'success', 'message' => $filename]); // Modifiez cette ligne
   } else {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Failed to upload image']);
