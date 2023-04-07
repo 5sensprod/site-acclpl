@@ -108,5 +108,15 @@
         "longitude": "4.348787",
         "name": "gare",
         "image": "img/uploads/642fcb71a8105.jpg"
+    },
+    {
+        "id": 12,
+        "street": "Avenue Jeanne d'Arc",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.9478",
+        "longitude": "4.347207",
+        "name": "jeanne",
+        "image": "img/uploads/642fe508bda70.jpg"
     }
 ]
