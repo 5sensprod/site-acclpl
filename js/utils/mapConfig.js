@@ -34,6 +34,8 @@ export async function addMarkersFromJson() {
 }
 
 
+
+
 // export { marker, map };
 
 export function getMap() {

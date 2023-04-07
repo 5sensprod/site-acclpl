@@ -1,10 +1,10 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data = $_POST['image'];
   $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
-  $filename = 'uploads/' . uniqid() . '.jpg';
+  $filename = 'img/uploads/' . uniqid() . '.jpg';
 
   if (file_put_contents($filename, $imageData)) {
     echo json_encode(['status' => 'success', 'message' => $filename]);

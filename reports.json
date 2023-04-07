@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "street": "Ruelle de l'Ange",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.955461",
+        "longitude": "4.361638",
+        "name": "ange",
+        "image": "img/uploads/642fbad975a44.jpg"
+    },
+    {
+        "id": 2,
+        "street": "Allée de Saint-Martin",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.967428",
+        "longitude": "4.351091",
+        "name": "sant martin",
+        "image": "img/uploads/642fbbeb01a89.jpg"
+    },
+    {
+        "id": 3,
+        "street": "Rue Grande Etape",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.958139",
+        "longitude": "4.367714",
+        "name": "Vélo",
+        "image": "img/uploads/642fbd8de9549.jpg"
+    },
+    {
+        "id": 4,
+        "street": "Rue Carnot",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.953539",
+        "longitude": "4.36666",
+        "name": "agence",
+        "image": "img/uploads/642fbdf7e49c0.jpg"
+    },
+    {
+        "id": 5,
+        "street": "Rue Edouard Manet",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.9338",
+        "longitude": "4.385527",
+        "name": "manet",
+        "image": "img/uploads/642fbf595c886.jpg"
+    },
+    {
+        "id": 6,
+        "street": "Rue de Juigné",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.954924",
+        "longitude": "4.358822",
+        "name": "juju",
+        "image": "img/uploads/642fc01cb3b87.jpg"
+    },
+    {
+        "id": 7,
+        "street": "Boulevard de l'Amitié entre les Peuples",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.939399",
+        "longitude": "4.387962",
+        "name": "tres",
+        "image": "img/uploads/642fc0c42c15f.jpg"
+    },
+    {
+        "id": 8,
+        "street": "Rue Pierre Songy",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.952836",
+        "longitude": "4.345571",
+        "name": "tresteres",
+        "image": "img/uploads/642fc57b5e77b.jpg"
+    },
+    {
+        "id": 9,
+        "street": "Allées Paul Doumer",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.953405",
+        "longitude": "4.372224",
+        "name": "doudou",
+        "image": "img/uploads/642fca2cf399c.jpg"
+    },
+    {
+        "id": 10,
+        "street": "Rue d'Alsace",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.94547",
+        "longitude": "4.369927",
+        "name": "alsace",
+        "image": "img/uploads/642fca769eafd.jpg"
+    },
+    {
+        "id": 11,
+        "street": "Avenue de la Gare",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.954886",
+        "longitude": "4.348787",
+        "name": "gare",
+        "image": "img/uploads/642fcb71a8105.jpg"
+    }
+]

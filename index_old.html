@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script type="module" src="js/main.js" defer></script>
+  <script type="module" src="js/utils/formReport.js" defer></script>
+  <title>Association Châlonnaise contre la pollution lumineuse</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+
+<body>
+  <div id="report">
+    <h1>Alerter</h1>
+    <p>Vous pouvez nous alerter d'une pollution lumineuse en remplissant le formulaire ci-dessous.</p>
+    <form id="report-form">
+      <label for="location-input">L'adresse</label>
+      <input id="location-input" type="text" placeholder="Recherchez une adresse..." />
+      <button id="add-address-button" type="button">Ajouter</button>
+  
+      <label for="name-input">Le nom du commerce</label>
+      <input id="name-input" type="text" placeholder="Nom du commerce" />
+  
+      <label for="photo-input">Prenez une photo de la source de pollution lumineuse</label>
+      <button id="start-camera" type="button">Lancer l'appareil photo</button>
+      <video id="video" autoplay playsinline style="display: none;"></video>
+      <button id="capture" style="display: none;" type="button">Prendre une photo</button>
+      <button id="keep" style="display: none;" type="button">Sélectionner cette photo</button>
+      <button id="retry" style="display: none;" type="button">Reprendre une photo</button>
+   <input id="photo-input" type="hidden" name="photo" /> 
+      <!-- <input type="hidden" id="photo-base64" name="photo-base64"> -->
+  
+      <button id="submit-button" type="submit">Soumettre</button>
+    </form>
+        <img id="photo" src="" alt="Votre photo">
+  </div>
+  
+
+  <!-- <div id="report">
+    <h1>Alerter</h1>
+    <p>Vous pouvez nous alerter d'une pollution lumineuse en remplissant le formulaire ci-dessous.</p>
+    <p>L'adresse</p>
+    <input id="location-input" type="text" placeholder="Recherchez une adresse..." />
+    <button id="add-address-button">Ajouter</button>
+    <p>Le nom du commerce</p>
+    <input id="name-input" type="text" placeholder="Nom du commerce" />
+    <p>Prenez une photo de la source de pollution lumineuse</p>
+    <button id="start-camera">Lancer l'appareil photo</button>
+    <video id="video" autoplay playsinline style="display: none;"></video>
+    <button id="capture" style="display: none;">Prendre une photo</button>
+    <button id="keep" style="display: none;">Garder la photo</button>
+    <button id="retry" style="display: none;">Reprendre une photo</button>
+    <img id="photo" src="" alt="Votre photo">
+  </div> -->
+
+  <!-- <div class="report">
+  <h1 class="report__title">Alerter</h1>
+  <p>Vous pouvez nous alerter d'une pollution lumineuse en remplissant le formulaire ci-dessous.</p>
+  
+  <form id="report-form" class="report__form">
+    <label for="location-input" class="report__label">L'adresse</label>
+    <input id="location-input" type="text" placeholder="Recherchez une adresse..." class="report__input" />
+    
+    <label for="name-input" class="report__label">Le nom du commerce</label>
+    <input id="name-input" type="text" placeholder="Nom du commerce" class="report__input" />
+
+    <label class="report__label">Prenez une photo de la source de pollution lumineuse</label>
+    <button id="start-camera" class="report__button">Lancer l'appareil photo</button>
+    <video id="video" autoplay playsinline style="display: none;" class="report__video"></video>
+    <button id="capture" style="display: none;" class="report__button">Prendre une photo</button>
+    <button id="keep" style="display: none;" class="report__button">Garder la photo</button>
+    <button id="retry" style="display: none;" class="report__button">Reprendre une photo</button>
+    <img id="photo" src="" alt="Votre photo" class="report__photo">
+
+    <button type="submit" class="report__submit-button">Soumettre</button>
+  </form>
+</div> -->
+
+
+  <div id="map"></div>
+</body>
+
+</html>
