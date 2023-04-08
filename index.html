@@ -12,11 +12,16 @@
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <title>Formulaire avec photo</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script type="module" src="scripts/main.js" defer></script>
 </head>
 
 <body>
     <div class="page">
+        <!-- <div id="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div> -->
+          
         <div id="map"></div>
         <div class="dropdown">
             <button class="dropdown-button">Signaler</button>
@@ -26,6 +31,7 @@
                 <form id="report-form" class="report-form">
                     <label for="location-input">L'adresse</label>
                     <input id="location-input" name="address" type="text" placeholder="Adresse" />
+                    <i id="geolocation-icon" class="fas fa-location-arrow"></i>
                     <div id="address-results" class="address-results"></div>
 
                     <input id="latitude-input" type="hidden" name="latitude" />

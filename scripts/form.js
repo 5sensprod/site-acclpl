@@ -1,5 +1,6 @@
 import { addMarkers } from './map.js';
 import { dropdownContent } from './dropdown.js';
+import { showSpinner, hideSpinner } from './utils/spinner.js';
 
 import { imgElement, startCameraButton } from './camera.js';
 
@@ -57,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const photoBlob = base64ToBlob(imgElement.src.replace(/^data:image\/\w+;base64,/, ''));
         formData.append('photo', photoBlob, 'photo.jpeg');
 
+        // Afficher le spinner pendant le traitement
+        showSpinner(reportForm);
+
         try {
             const response = await fetch('report.php', {
                 method: 'POST',
@@ -78,6 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ajoutez les lignes suivantes pour réinitialiser l'état du bouton de soumission
                 photoInputElement.value = '';
                 checkFormCompletion();
+                // Masquer le spinner une fois le traitement terminé
+                setTimeout(() => {
+                    hideSpinner();
+                }, 500);
 
             } catch (error) {
                 console.error('Error parsing JSON:', error);

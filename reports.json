@@ -17,6 +17,16 @@
         "latitude": "48.955605",
         "longitude": "4.361694",
         "name": "agence",
-        "image": "img/uploads/6431198804852.jpg"
+        "image": "img/uploads/643130126a6c8.jpg"
+    },
+    {
+        "id": 3,
+        "street": "Rue Camille Corot",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.933654",
+        "longitude": "4.384717",
+        "name": "coco",
+        "image": "img/uploads/643130425061d.jpg"
     }
 ]

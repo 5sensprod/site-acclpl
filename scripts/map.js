@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     addMarkers();
 });
 
+// Ajoutez cette fonction pour centrer la carte
+export function centerMap(latitude, longitude, zoom = 16) {
+    map.setView([latitude, longitude], zoom);
+}
+
 export function updateMarker(latitude, longitude, popupText) {
     // Centrer la carte sur les coordonnées
     map.setView([latitude, longitude], 16);
