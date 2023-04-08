@@ -39,14 +39,14 @@
                     <input id="name-input" name="name" type="text" placeholder="Nom du commerce" />
 
                     <label for="photo-input">Prenez une photo de la source de pollution lumineuse</label>
-                    <button id="start-camera" type="button">Lancer l'appareil photo</button>
-                    <video id="video" autoplay playsinline style="display: none;"></video>
-                    <button id="capture" style="display: none;" type="button">Prendre une photo</button>
-                    <button id="keep" style="display: none;" type="button">Sélectionner cette photo</button>
-                    <button id="retry" style="display: none;" type="button">Reprendre une photo</button>
-                    <canvas id="canvas" style="display:none;"></canvas>
+                    <button id="start-camera"type="button">Lancer l'appareil photo</button>
+                    <video id="video" class="video-keep" autoplay playsinline style="display: none;"></video>
+                    <button id="capture" style="display: none;" type="button" class="button-cam">Prendre une photo</button>
+                    <button id="keep" style="display: none;" type="button" class="button-cam">Sélectionner cette photo</button>
+                    <button id="retry" style="display: none;" type="button" class="button-cam">Reprendre une photo</button>
+                    <canvas id="canvas" class="video-keep" style="display:none;"></canvas>
                     <input id="photo-input" type="hidden" name="photo" />
-                    <img id="photo" src="" alt="Votre photo">
+                    <img id="photo" class="photo-keep" src="" alt="Votre photo">
                     <button id="submit-button" type="submit">Soumettre</button>
                 </form>
                 <!-- </div> -->
@@ -255,7 +255,7 @@
 
             // Ajouter un nouveau marqueur
             marker = L.marker(coordinates).addTo(map);
-            marker.bindPopup(`<b>${result.properties.label}</b>`).openPopup();
+            marker.bindPopup(`<b>${result.properties.street}</b>`).openPopup();
 
             // Mettre à jour la valeur de l'input et vider les résultats de recherche
             locationInput.value = result.properties.label;
@@ -301,28 +301,95 @@
 
 
         async function addMarkers() {
-            try {
-                const response = await fetch('reports.json');
-                const data = await response.json();
+    try {
+        const response = await fetch('reports.json');
+        const data = await response.json();
 
-                // Parcourir les données et ajouter un marqueur pour chaque entrée
-                for (let entry of data) {
-                    const marker = L.marker([entry.latitude, entry.longitude]).addTo(map);
-                    const popupContent = `
-        <b>${entry.name}</b><br>
-        ${entry.street}<br>
-        ${entry.postal_code} ${entry.city}<br>
-        <img src="${entry.image}" alt="Photo">
-      `;
-                    marker.bindPopup(`<div class="popup-content"><b>${entry.name}</b><br>${entry.street}<br>${entry.postal_code} ${entry.city}<br><img src="${entry.image}"></div>`);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+        // Parcourir les données et ajouter un marqueur pour chaque entrée
+        for (let entry of data) {
+            const marker = L.marker([entry.latitude, entry.longitude]).addTo(map);
+
+            const popupContent = `
+                <div class="popup-content">
+                    <b>${entry.name}</b><br>
+                    ${entry.street}<br>
+                    ${entry.postal_code} ${entry.city}<br>
+                    <img src="${entry.image}">
+                    <button class="delete-button" data-id="${entry.id}">Supprimer</button>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+            marker.on('popupopen', () => {
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const reportId = event.target.dataset.id;
+                        const result = await deleteReport(reportId);
+                        if (result.status === 'success') {
+                            map.removeLayer(marker);
+                        } else {
+                            alert('Erreur lors de la suppression du rapport');
+                        }
+                    });
+                });
+            });
         }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 
         // Utiliser la fonction addMarkers pour ajouter les marqueurs à la carte
         addMarkers();
+
+
+
+        // delete
+        async function fetchReports() {
+    const response = await fetch('reports.json');
+    const data = await response.json();
+    return data;
+}
+
+async function deleteReport(reportId) {
+    const response = await fetch('delete_report.php', {
+        method: 'POST',
+        body: JSON.stringify({ id: reportId }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}
+
+function createReportListItem(report) {
+    const li = document.createElement('li');
+    li.textContent = `ID: ${report.id}, Name: ${report.name}, Location: ${report.street}, ${report.city}, ${report.postal_code}`;
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.onclick = async () => {
+        const result = await deleteReport(report.id);
+        if (result.status === 'success') {
+            li.remove();
+        } else {
+            alert('Erreur lors de la suppression du rapport');
+        }
+    };
+    li.appendChild(deleteButton);
+    return li;
+}
+
+(async () => {
+    const reportList = document.getElementById('report-list');
+    const reports = await fetchReports();
+    reports.forEach(report => {
+        const listItem = createReportListItem(report);
+        reportList.appendChild(listItem);
+    });
+})();
 
     </script>
 </body>
