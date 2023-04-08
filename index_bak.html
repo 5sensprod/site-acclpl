@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <title>Formulaire avec photo</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <!-- <script type="module" src="js/map.js" defer></script> -->
+</head>
+
+<body>
+    <div class="page">
+        <div id="map"></div>
+        <div class="dropdown">
+            <button class="dropdown-button">Signaler</button>
+            <div class="dropdown-content">
+                <!-- 
+            <div class="report"> -->
+                <form id="report-form" class="report-form">
+                    <label for="location-input">L'adresse</label>
+                    <input id="location-input" name="address" type="text" placeholder="Adresse" />
+                    <div id="address-results" class="address-results"></div>
+
+                    <input id="latitude-input" type="hidden" name="latitude" />
+                    <input id="longitude-input" type="hidden" name="longitude" />
+                    <input id="street-input" type="hidden" name="street" />
+                    <input id="city-input" type="hidden" name="city" />
+                    <input id="postal-code-input" type="hidden" name="postal_code" />
+
+
+                    <label for="name-input">Le nom du commerce</label>
+                    <input id="name-input" name="name" type="text" placeholder="Nom du commerce" />
+
+                    <label for="photo-input">Prenez une photo de la source de pollution lumineuse</label>
+                    <button id="start-camera"type="button">Lancer l'appareil photo</button>
+                    <video id="video" class="video-keep" autoplay playsinline style="display: none;"></video>
+                    <button id="capture" style="display: none;" type="button" class="button-cam">Prendre une photo</button>
+                    <button id="keep" style="display: none;" type="button" class="button-cam">Sélectionner cette photo</button>
+                    <button id="retry" style="display: none;" type="button" class="button-cam">Reprendre une photo</button>
+                    <canvas id="canvas" class="video-keep" style="display:none;"></canvas>
+                    <input id="photo-input" type="hidden" name="photo" />
+                    <img id="photo" class="photo-keep" src="" alt="Votre photo">
+                    <button id="submit-button" type="submit">Soumettre</button>
+                </form>
+                <!-- </div> -->
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+        // dropdown
+        const dropdownButton = document.querySelector('.dropdown-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        dropdownButton.addEventListener('click', () => {
+            dropdownContent.classList.toggle('dropdown-content-up');
+        });
+
+
+
+        // Convertir la chaîne de caractères en base64 en un objet Blob
+        function base64ToBlob(base64, mimeType = 'image/jpeg') {
+            const byteCharacters = atob(base64);
+            const byteArrays = [];
+
+            for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                const slice = byteCharacters.slice(offset, offset + 512);
+                const byteNumbers = new Array(slice.length);
+
+                for (let i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                const byteArray = new Uint8Array(byteNumbers);
+                byteArrays.push(byteArray);
+            }
+
+            return new Blob(byteArrays, { type: mimeType });
+        }
+
+        const reportForm = document.getElementById('report-form');
+
+        reportForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Empêcher le comportement par défaut du navigateur
+
+            const locationInput = document.getElementById('location-input');
+            const nameInput = document.getElementById('name-input');
+            const photoInputElement = document.getElementById('photo-input');
+
+            const formData = new FormData(reportForm);
+            formData.append('location', locationInput.value);
+            formData.append('name', nameInput.value);
+
+            // Convertir la chaîne de caractères en base64 en un objet Blob et l'ajouter à FormData
+            const photoBlob = base64ToBlob(imgElement.src.replace(/^data:image\/\w+;base64,/, ''));
+            formData.append('photo', photoBlob, 'photo.jpeg');
+
+            try {
+                const response = await fetch('report.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const text = await response.text();
+                console.log('Response text:', text);
+
+                try {
+                    const data = JSON.parse(text);
+                    console.log('Success:', data);
+                    reportForm.reset(); // Réinitialiser les champs du formulaire
+                    addMarkers()
+                    imgElement.style.display = 'none'; // Cacher l'image
+                    startCameraButton.style.display = 'block'; // Afficher le bouton "Lancer l'appareil photo"
+                    await addMarkers();
+
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+
+        const startCameraButton = document.getElementById('start-camera');
+        const videoElement = document.getElementById('video');
+        const captureButton = document.getElementById('capture');
+        const keepButton = document.getElementById('keep');
+        const retryButton = document.getElementById('retry');
+        const canvasElement = document.getElementById('canvas');
+        const photoInputElement = document.getElementById('photo-input');
+        const imgElement = document.getElementById('photo');
+
+        let cameraStream;
+
+        async function getCameraReady(video, constraints = { video: { facingMode: 'environment' } }) {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            video.srcObject = stream;
+            return stream;
+        }
+
+        function stopCamera(stream) {
+            stream.getTracks().forEach((track) => {
+                track.stop();
+            });
+        }
+
+        startCameraButton.addEventListener('click', async () => {
+            cameraStream = await getCameraReady(videoElement);
+            videoElement.style.display = 'inline';
+            captureButton.style.display = 'inline';
+            startCameraButton.style.display = 'none';
+            keepButton.style.display = 'none';
+            retryButton.style.display = 'none';
+            // Cacher les éléments "location-input", "add-address-button", "name-input"
+            document.getElementById('location-input').style.display = 'none';
+            // document.getElementById('add-address-button').style.display = 'none';
+            document.getElementById('name-input').style.display = 'none';
+            // Cacher le bouton "Soumettre"
+            document.getElementById('submit-button').style.display = 'none';
+            // Afficher les boutons "keepButton" et "retryButton"
+            keepButton.style.display = 'inline';
+            retryButton.style.display = 'none';
+        });
+        captureButton.addEventListener('click', () => {
+            canvasElement.width = videoElement.videoWidth;
+            canvasElement.height = videoElement.videoHeight;
+            const ctx = canvasElement.getContext('2d');
+            ctx.drawImage(videoElement, 0, 0);
+            imgElement.src = canvasElement.toDataURL('image/jpeg');
+            photoInputElement.value = imgElement.src.replace(/^data\:image\/\w+\;base64\,/, '');
+            stopCamera(cameraStream);
+
+            videoElement.style.display = 'none';
+            captureButton.style.display = 'none';
+            keepButton.style.display = 'inline';
+            retryButton.style.display = 'inline';
+            // Afficher la photo prise dans l'élément "img" avec l'ID "photo"
+            document.getElementById('photo').src = imgElement.src;
+        });
+
+        retryButton.addEventListener('click', async () => {
+            cameraStream = await getCameraReady(videoElement);
+            videoElement.style.display = 'inline';
+            captureButton.style.display = 'inline';
+            keepButton.style.display = 'none';
+            retryButton.style.display = 'none';
+        });
+
+        keepButton.addEventListener('click', () => {
+            stopCamera(cameraStream);
+            videoElement.style.display = 'none';
+            captureButton.style.display = 'none';
+            keepButton.style.display = 'none';
+            retryButton.style.display = 'none';
+            startCameraButton.style.display = 'inline';
+            // Afficher les éléments "location-input" et "name-input"
+            document.getElementById('location-input').style.display = 'inline';
+            document.getElementById('name-input').style.display = 'inline';
+
+            // Afficher le bouton "Soumettre"
+            document.getElementById('submit-button').style.display = 'inline';
+        });
+
+
+        // map
+        let map;
+        let marker;
+        function initMap() {
+            map = L.map('map', {
+                center: [48.956682, 4.364298], // Coordonnées de Châlons-en-Champagne
+                zoom: 13,
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution:
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+
+            marker = L.marker([48.956682, 4.364298]).addTo(map);
+            marker.bindPopup('<b>Châlons-en-Champagne</b>').closePopup();
+            // addMarkersFromJson();
+        }
+        document.addEventListener('DOMContentLoaded', initMap);
+
+
+        // addresse
+
+
+        function handleAddressClick(result) {
+
+            const { coordinates } = result.geometry;
+            document.getElementById('latitude-input').value = coordinates[1];
+            document.getElementById('longitude-input').value = coordinates[0];
+            document.getElementById('street-input').value = result.properties.street || '';
+            document.getElementById('city-input').value = result.properties.city || '';
+            document.getElementById('postal-code-input').value = result.properties.postcode || '';
+
+
+            // Centrer la carte sur les coordonnées
+            map.setView(coordinates.reverse(), 16);
+
+            // Supprimer le marqueur précédent, s'il existe
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Ajouter un nouveau marqueur
+            marker = L.marker(coordinates).addTo(map);
+            marker.bindPopup(`<b>${result.properties.street}</b>`).openPopup();
+
+            // Mettre à jour la valeur de l'input et vider les résultats de recherche
+            locationInput.value = result.properties.label;
+            addressResults.innerHTML = '';
+        }
+
+        const locationInput = document.getElementById('location-input');
+        const addressResults = document.getElementById('address-results');
+
+        locationInput.addEventListener('input', async (event) => {
+            const query = event.target.value;
+
+            if (query.length < 3) {
+                addressResults.innerHTML = '';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&postcode=51000`);
+                const data = await response.json();
+                const { features } = data;
+
+                addressResults.innerHTML = '';
+
+                features.forEach((feature) => {
+                    const addressElement = document.createElement('div');
+                    addressElement.classList.add('address-result');
+                    addressElement.textContent = feature.properties.label;
+
+                    // Remplacez le gestionnaire d'événements actuel par handleAddressClick
+                    addressElement.addEventListener('click', () => handleAddressClick(feature));
+
+                    addressResults.appendChild(addressElement);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+
+        // afficher les markers
+
+
+
+        async function addMarkers() {
+    try {
+        const response = await fetch('reports.json');
+        const data = await response.json();
+
+        // Parcourir les données et ajouter un marqueur pour chaque entrée
+        for (let entry of data) {
+            const marker = L.marker([entry.latitude, entry.longitude]).addTo(map);
+
+            const popupContent = `
+                <div class="popup-content">
+                    <b>${entry.name}</b><br>
+                    ${entry.street}<br>
+                    ${entry.postal_code} ${entry.city}<br>
+                    <img src="${entry.image}">
+                    <button class="delete-button" data-id="${entry.id}">Supprimer</button>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+            marker.on('popupopen', () => {
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const reportId = event.target.dataset.id;
+                        const result = await deleteReport(reportId);
+                        if (result.status === 'success') {
+                            map.removeLayer(marker);
+                        } else {
+                            alert('Erreur lors de la suppression du rapport');
+                        }
+                    });
+                });
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+
+        // Utiliser la fonction addMarkers pour ajouter les marqueurs à la carte
+        addMarkers();
+
+
+
+        // delete
+        async function fetchReports() {
+    const response = await fetch('reports.json');
+    const data = await response.json();
+    return data;
+}
+
+async function deleteReport(reportId) {
+    const response = await fetch('delete_report.php', {
+        method: 'POST',
+        body: JSON.stringify({ id: reportId }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+    return data;
+}
+
+function createReportListItem(report) {
+    const li = document.createElement('li');
+    li.textContent = `ID: ${report.id}, Name: ${report.name}, Location: ${report.street}, ${report.city}, ${report.postal_code}`;
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.onclick = async () => {
+        const result = await deleteReport(report.id);
+        if (result.status === 'success') {
+            li.remove();
+        } else {
+            alert('Erreur lors de la suppression du rapport');
+        }
+    };
+    li.appendChild(deleteButton);
+    return li;
+}
+
+(async () => {
+    const reportList = document.getElementById('report-list');
+    const reports = await fetchReports();
+    reports.forEach(report => {
+        const listItem = createReportListItem(report);
+        reportList.appendChild(listItem);
+    });
+})();
+
+    </script>
+</body>
+
+</html>
