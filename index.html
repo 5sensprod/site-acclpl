@@ -382,14 +382,14 @@ function createReportListItem(report) {
     return li;
 }
 
-(async () => {
-    const reportList = document.getElementById('report-list');
-    const reports = await fetchReports();
-    reports.forEach(report => {
-        const listItem = createReportListItem(report);
-        reportList.appendChild(listItem);
-    });
-})();
+// (async () => {
+//     const reportList = document.getElementById('report-list');
+//     const reports = await fetchReports();
+//     reports.forEach(report => {
+//         const listItem = createReportListItem(report);
+//         reportList.appendChild(listItem);
+//     });
+// })();
 
     </script>
 </body>

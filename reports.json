@@ -8,15 +8,5 @@
         "longitude": "",
         "name": "agence",
         "image": "img/uploads/6430f04a50df9.jpg"
-    },
-    {
-        "id": 2,
-        "street": "Rue des Poissonniers",
-        "city": "Châlons-en-Champagne",
-        "postal_code": "51000",
-        "latitude": "48.955605",
-        "longitude": "4.361694",
-        "name": "agence",
-        "image": "img/uploads/6430f058f2abc.jpg"
     }
 ]
