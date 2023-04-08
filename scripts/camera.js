@@ -10,7 +10,6 @@ function stopCamera(stream) {
     });
 }
 
-
 const imgElement = document.getElementById('photo');
 const startCameraButton = document.getElementById('start-camera');
 
@@ -22,9 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const retryButton = document.getElementById('retry');
     const canvasElement = document.getElementById('canvas');
     const photoInputElement = document.getElementById('photo-input');
-
-
-
 
     let cameraStream;
 
@@ -49,13 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.drawImage(videoElement, 0, 0);
         imgElement.src = canvasElement.toDataURL('image/jpeg');
         photoInputElement.value = imgElement.src.replace(/^data\:image\/\w+\;base64\,/, '');
+        photoInputElement.dispatchEvent(new Event('change'));
         stopCamera(cameraStream);
-
+    
         videoElement.style.display = 'none';
         captureButton.style.display = 'none';
         keepButton.style.display = 'inline';
         retryButton.style.display = 'inline';
         document.getElementById('photo').src = imgElement.src;
+        
+        imgElement.style.display = 'inline-block'; // Ajoutez cette ligne pour afficher l'image capturée
     });
 
     retryButton.addEventListener('click', async () => {

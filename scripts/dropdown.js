@@ -6,3 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownContent.classList.toggle('dropdown-content-up');
     });
 });
+
+export const dropdownContent = document.querySelector('.dropdown-content');
