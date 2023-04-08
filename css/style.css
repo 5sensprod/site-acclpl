@@ -235,7 +235,7 @@ display: none;
 
 /* geoloc */
 #geolocation-icon {
-  position: absolute;
+  /* position: absolute; */
   right: 10px;
   top: 30px;
   /* transform: translateY(-50%); */

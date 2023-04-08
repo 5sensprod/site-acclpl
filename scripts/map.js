@@ -1,4 +1,4 @@
-// import { handleAddressClick } from './address.js';
+import { handleAddressClick } from './address.js';
 import { deleteReport } from './report.js';
 
 let map;

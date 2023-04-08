@@ -28,5 +28,15 @@
         "longitude": "4.384717",
         "name": "coco",
         "image": "img/uploads/643130425061d.jpg"
+    },
+    {
+        "id": 4,
+        "street": "Avenue du Général George Smith Patton",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.964811",
+        "longitude": "4.347284",
+        "name": "vxcv",
+        "image": "img/uploads/64313761721c4.jpg"
     }
 ]
