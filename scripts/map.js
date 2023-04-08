@@ -84,3 +84,10 @@ export function updateMarker(latitude, longitude, popupText) {
     marker.bindPopup(`<b>${popupText}</b>`).openPopup();
 }
 
+export function removeMarker() {
+    if (marker) {
+        map.removeLayer(marker);
+        marker = null;
+    }
+}
+

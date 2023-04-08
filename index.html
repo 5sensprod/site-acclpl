@@ -30,8 +30,11 @@
             <div class="report"> -->
                 <form id="report-form" class="report-form">
                     <label for="location-input">L'adresse</label>
-                    <input id="location-input" name="address" type="text" placeholder="Adresse" />
-                    <i id="geolocation-icon" class="fas fa-location-arrow"></i>
+                    <div class="input-with-icon">
+                        <input id="location-input" name="address" type="search" placeholder="Adresse" />
+                        <i id="clear-location-icon" class="fas fa-times-circle"></i>
+                    </div>
+                    <i id="geolocation-icon" class="fas fa-location-arrow geo-icon"></i>
                     <div id="address-results" class="address-results"></div>
 
                     <input id="latitude-input" type="hidden" name="latitude" />
@@ -42,8 +45,10 @@
 
 
                     <label for="name-input">Le nom du commerce</label>
-                    <input id="name-input" name="name" type="text" placeholder="Nom du commerce" />
-
+                    <div class="input-with-icon">
+                        <input id="name-input" name="name" type="text" placeholder="Nom du commerce" />
+                        <i id="clear-name-icon" class="fas fa-times-circle"></i>
+                    </div>
                     <label for="photo-input">Prenez une photo de la source de pollution lumineuse</label>
                     <button id="start-camera"type="button">Lancer l'appareil photo</button>
                     <video id="video" class="video-keep" autoplay playsinline style="display: none;"></video>

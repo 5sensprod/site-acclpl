@@ -1,7 +1,7 @@
 import { centerMap, updateMarker } from './map.js';
 
 const locationInput = document.getElementById('location-input');
-const addressResults = document.getElementById('address-results');
+export const addressResults = document.getElementById('address-results');
 
 export function handleAddressClick(result) {
     const { coordinates } = result.geometry;

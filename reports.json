@@ -38,5 +38,35 @@
         "longitude": "4.347284",
         "name": "vxcv",
         "image": "img/uploads/64313761721c4.jpg"
+    },
+    {
+        "id": 5,
+        "street": "Rue du Commerce",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.936821",
+        "longitude": "4.383205",
+        "name": "commerce",
+        "image": "img/uploads/643148643078e.jpg"
+    },
+    {
+        "id": 6,
+        "street": "Rue Jean Jaurès",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.95509",
+        "longitude": "4.354048",
+        "name": "comm",
+        "image": "img/uploads/6431491869efe.jpg"
+    },
+    {
+        "id": 7,
+        "street": "Avenue du Général George Smith Patton",
+        "city": "Châlons-en-Champagne",
+        "postal_code": "51000",
+        "latitude": "48.964811",
+        "longitude": "4.347284",
+        "name": "general",
+        "image": "img/uploads/64314945de579.jpg"
     }
 ]
