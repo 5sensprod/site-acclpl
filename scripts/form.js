@@ -73,7 +73,7 @@ async function submitForm(event, reportForm, locationInput, nameInput, photoInpu
 
             photoInputElement.value = '';
             checkFormCompletion(locationInput, nameInput, photoInputElement, submitButton);
-            
+
             setTimeout(() => {
                 hideSpinner();
             }, 500);

@@ -12,29 +12,24 @@
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <title>Formulaire avec photo</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script type="module" src="scripts/main.js" defer></script>
 </head>
 
 <body>
     <div class="page">
-        <!-- <div id="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-        </div> -->
-          
-        <div id="map"></div>
+<div id="map"></div>
         <div class="dropdown">
             <button class="dropdown-button">Signaler</button>
             <div class="dropdown-content">
-                <!-- 
-            <div class="report"> -->
                 <form id="report-form" class="report-form">
                     <label for="location-input">L'adresse</label>
                     <div class="input-with-icon">
-                        <input id="location-input" name="address" type="search" placeholder="Adresse" />
+                        <input id="location-input" name="address" type="search" placeholder="Adresse" class="input-button"/>
                         <i id="clear-location-icon" class="fas fa-times-circle"></i>
+                        <i id="geolocation-icon" class="fas fa-location-arrow geo-icon"></i>
+
                     </div>
-                    <i id="geolocation-icon" class="fas fa-location-arrow geo-icon"></i>
                     <div id="address-results" class="address-results"></div>
 
                     <input id="latitude-input" type="hidden" name="latitude" />
@@ -46,24 +41,24 @@
 
                     <label for="name-input">Le nom du commerce</label>
                     <div class="input-with-icon">
-                        <input id="name-input" name="name" type="text" placeholder="Nom du commerce" />
+                        <input id="name-input" name="name" type="text" placeholder="Nom du commerce"class="input-button"/>
                         <i id="clear-name-icon" class="fas fa-times-circle"></i>
                     </div>
                     <label for="photo-input">Prenez une photo de la source de pollution lumineuse</label>
-                    <button id="start-camera"type="button">Lancer l'appareil photo</button>
+                    <button id="start-camera" type="button">Lancer l'appareil photo</button>
                     <video id="video" class="video-keep" autoplay playsinline style="display: none;"></video>
-                    <button id="capture" style="display: none;" type="button" class="button-cam">Prendre une photo</button>
-                    <button id="keep" style="display: none;" type="button" class="button-cam">Sélectionner cette photo</button>
-                    <button id="retry" style="display: none;" type="button" class="button-cam">Reprendre une photo</button>
+                    <button id="capture" style="display: none;" type="button" class="button-cam">Prendre une
+                        photo</button>
+                    <button id="keep" style="display: none;" type="button" class="button-cam">Sélectionner cette
+                        photo</button>
+                    <button id="retry" style="display: none;" type="button" class="button-cam">Reprendre une
+                        photo</button>
                     <canvas id="canvas" class="video-keep" style="display:none;"></canvas>
                     <input id="photo-input" type="hidden" name="photo" />
                     <img id="photo" class="photo-view" src="" alt="Votre photo">
                     <button id="submit-button" class="submit-button" type="submit">Soumettre</button>
 
                 </form>
-                <!-- </div> -->
-                <!-- <ul id="report-list"></ul> -->
-
             </div>
         </div>
 
