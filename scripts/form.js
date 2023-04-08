@@ -1,5 +1,7 @@
 import { addMarkers } from './map.js';
 
+import { imgElement, startCameraButton } from './camera.js';
+
 function base64ToBlob(base64, mimeType = 'image/jpeg') {
     const byteCharacters = atob(base64);
     const byteArrays = [];

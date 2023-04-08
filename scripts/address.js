@@ -1,8 +1,9 @@
-import { map, marker } from './map.js';
-// import { updateMarker } from './map.js';
+import { updateMarker } from './map.js';
+
+const locationInput = document.getElementById('location-input');
+const addressResults = document.getElementById('address-results');
 
 export function handleAddressClick(result) {
-
     const { coordinates } = result.geometry;
     document.getElementById('latitude-input').value = coordinates[1];
     document.getElementById('longitude-input').value = coordinates[0];
@@ -10,18 +11,8 @@ export function handleAddressClick(result) {
     document.getElementById('city-input').value = result.properties.city || '';
     document.getElementById('postal-code-input').value = result.properties.postcode || '';
 
-
-    // Centrer la carte sur les coordonnées
-    map.setView(coordinates.reverse(), 16);
-
-    // Supprimer le marqueur précédent, s'il existe
-    if (marker) {
-        map.removeLayer(marker);
-    }
-
-    // Ajouter un nouveau marqueur
-    marker = L.marker(coordinates).addTo(map);
-    marker.bindPopup(`<b>${result.properties.street}</b>`).openPopup();
+    // Utilisez updateMarker pour centrer la carte et mettre à jour le marqueur
+    updateMarker(coordinates[1], coordinates[0], result.properties.street);
 
     // Mettre à jour la valeur de l'input et vider les résultats de recherche
     locationInput.value = result.properties.label;
@@ -29,9 +20,6 @@ export function handleAddressClick(result) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const locationInput = document.getElementById('location-input');
-    const addressResults = document.getElementById('address-results');
-
     locationInput.addEventListener('input', async (event) => {
         const query = event.target.value;
 

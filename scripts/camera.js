@@ -10,15 +10,21 @@ function stopCamera(stream) {
     });
 }
 
+
+const imgElement = document.getElementById('photo');
+const startCameraButton = document.getElementById('start-camera');
+
 document.addEventListener('DOMContentLoaded', () => {
-    const startCameraButton = document.getElementById('start-camera');
+
     const videoElement = document.getElementById('video');
     const captureButton = document.getElementById('capture');
     const keepButton = document.getElementById('keep');
     const retryButton = document.getElementById('retry');
     const canvasElement = document.getElementById('canvas');
     const photoInputElement = document.getElementById('photo-input');
-    const imgElement = document.getElementById('photo');
+
+
+
 
     let cameraStream;
 
@@ -72,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('submit-button').style.display = 'inline';
     });
 });
+export { imgElement, startCameraButton };

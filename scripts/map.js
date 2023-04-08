@@ -4,7 +4,7 @@ import { deleteReport } from './report.js';
 let map;
 let marker;
 
-async function addMarkers() {
+export async function addMarkers() {
     try {
         const response = await fetch('reports.json');
         const data = await response.json();
@@ -55,8 +55,8 @@ function initMap() {
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    marker = L.marker([48.956682, 4.364298]).addTo(map);
-    marker.bindPopup('<b>Châlons-en-Champagne</b>').closePopup();
+    // marker = L.marker([48.956682, 4.364298]).addTo(map);
+    // marker.bindPopup('<b>Châlons-en-Champagne</b>').closePopup();
     // addMarkersFromJson();
 }
 
@@ -65,10 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
     addMarkers();
 });
 
-export function updateMarker(lat, lng) {
+export function updateMarker(latitude, longitude, popupText) {
+    // Centrer la carte sur les coordonnées
+    map.setView([latitude, longitude], 16);
+
+    // Supprimer le marqueur précédent, s'il existe
     if (marker) {
-        marker.setLatLng([lat, lng]);
-    } else {
-        marker = L.marker([lat, lng]).addTo(map);
+        map.removeLayer(marker);
     }
+
+    // Ajouter un nouveau marqueur
+    marker = L.marker([latitude, longitude]).addTo(map);
+    marker.bindPopup(`<b>${popupText}</b>`).openPopup();
 }
+

@@ -16,28 +16,28 @@ export async function deleteReport(reportId) {
     return data;
 }
 
-function createReportListItem(report) {
-    const li = document.createElement('li');
-    li.textContent = `ID: ${report.id}, Name: ${report.name}, Location: ${report.street}, ${report.city}, ${report.postal_code}`;
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.onclick = async () => {
-        const result = await deleteReport(report.id);
-        if (result.status === 'success') {
-            li.remove();
-        } else {
-            alert('Erreur lors de la suppression du rapport');
-        }
-    };
-    li.appendChild(deleteButton);
-    return li;
-}
+// function createReportListItem(report) {
+//     const li = document.createElement('li');
+//     li.textContent = `ID: ${report.id}, Name: ${report.name}, Location: ${report.street}, ${report.city}, ${report.postal_code}`;
+//     const deleteButton = document.createElement('button');
+//     deleteButton.textContent = 'Supprimer';
+//     deleteButton.onclick = async () => {
+//         const result = await deleteReport(report.id);
+//         if (result.status === 'success') {
+//             li.remove();
+//         } else {
+//             alert('Erreur lors de la suppression du rapport');
+//         }
+//     };
+//     li.appendChild(deleteButton);
+//     return li;
+// }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const reportList = document.getElementById('report-list');
-    const reports = await fetchReports();
-    reports.forEach(report => {
-        const listItem = createReportListItem(report);
-        reportList.appendChild(listItem);
-    });
-});
+// document.addEventListener('DOMContentLoaded', async () => {
+//     const reportList = document.getElementById('report-list');
+//     const reports = await fetchReports();
+//     reports.forEach(report => {
+//         const listItem = createReportListItem(report);
+//         reportList.appendChild(listItem);
+//     });
+// });
